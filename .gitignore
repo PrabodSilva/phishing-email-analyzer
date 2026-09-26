@@ -1,0 +1,7 @@
+venv/
+__pycache__/
+*.pyc
+.vscode/
+data/history.json
+static/charts/*.png
+sample_emails/real*

@@ -1,0 +1,31 @@
+Return-Path: <bounce@mailer-7731.ru>
+Received: from mx.google.com (mx.google.com [209.85.220.41])
+        by smtp.gmail.com with ESMTPS id qqq111
+        for <praboth@example.com>; Fri, 25 Sep 2026 02:47:12 +0530
+Received: from unknown-host (unknown [185.234.72.19])
+        by mx.google.com with SMTP id www222
+        for <praboth@example.com>; Fri, 25 Sep 2026 02:47:10 +0530
+Received: from vps-4411.cheap-hosting.top (vps-4411.cheap-hosting.top [185.234.72.19])
+        by unknown-host with SMTP; Fri, 25 Sep 2026 02:47:05 +0530
+Authentication-Results: mx.google.com;
+       dkim=none;
+       spf=fail smtp.mailfrom=bounce@mailer-7731.ru;
+       dmarc=fail (p=NONE) header.from=paypa1-alerts.xyz
+From: "PayPal Security" <security@paypa1-alerts.xyz>
+Reply-To: paypal.helpdesk.team@gmail.com
+To: praboth@example.com
+Subject: URGENT: Your account has been suspended
+Date: Fri, 25 Sep 2026 02:47:00 +0530
+Message-ID: <98765@paypa1-alerts.xyz>
+MIME-Version: 1.0
+Content-Type: text/html; charset="utf-8"
+
+<html><body>
+<p>Dear Customer,</p>
+<p>We noticed <b>unusual activity</b> on your account. Your account has been
+<b>suspended</b>. You must verify immediately within 24 hours or your account
+will be permanently closed.</p>
+<p><a href="http://paypa1-alerts.xyz/secure/login.php">https://www.paypal.com/verify</a></p>
+<p>Please confirm your password and card number to restore access.</p>
+<p>PayPal Security Team</p>
+</body></html>

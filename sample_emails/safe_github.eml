@@ -1,0 +1,28 @@
+Return-Path: <noreply@github.com>
+Received: from mx.google.com (mx.google.com [209.85.220.41])
+        by smtp.gmail.com with ESMTPS id abc123
+        for <praboth@example.com>; Fri, 25 Sep 2026 09:15:02 +0530
+Received: from out-21.smtp.github.com (out-21.smtp.github.com [192.30.252.204])
+        by mx.google.com with ESMTPS id xyz789
+        for <praboth@example.com>; Fri, 25 Sep 2026 09:15:01 +0530
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@github.com;
+       spf=pass smtp.mailfrom=noreply@github.com;
+       dmarc=pass (p=REJECT) header.from=github.com
+From: GitHub <noreply@github.com>
+To: Praboth <praboth@example.com>
+Subject: [GitHub] A new SSH key was added to your account
+Date: Fri, 25 Sep 2026 09:15:00 +0530
+Message-ID: <abc123@github.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+
+Hi Praboth,
+
+A new public key was added to your account.
+
+If you added this key, you can ignore this message.
+If not, please review your SSH keys at https://github.com/settings/keys
+
+Thanks,
+The GitHub Team
