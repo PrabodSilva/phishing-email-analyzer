@@ -5,7 +5,7 @@ A Python tool that analyzes `.eml` files and URLs for phishing red flags and giv
 ## Progress
 - [x] Day 1: Email header analysis (Reply-To / Return-Path mismatch, SPF/DKIM/DMARC, display-name spoofing, mail route)
 - [x] Day 2: URL analyzer (IP links, @ trick, lookalike brands, shorteners, suspicious endings, domain age)
-- [ ] Day 3: Body analysis + risk scoring
+- [x] Day 3: Body analysis + risk scoring (link mask trick, urgency words, secret requests, risky attachments, 0-100 score)
 - [ ] Day 4: Flask dashboard
 
 ## Run (Day 1)

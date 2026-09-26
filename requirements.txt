@@ -1,2 +1,5 @@
 tldextract
 python-whois
+tldextract
+python-whois
+beautifulsoup4
