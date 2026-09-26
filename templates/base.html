@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Phishing Email Analyzer</title>
+  <style>
+    :root {
+      --bg: #f4f6f9; --card: #ffffff; --text: #1f2933; --muted: #616e7c; --line: #e4e7eb;
+      --blue: #2563eb; --safe: #15803d; --safe-bg: #dcfce7;
+      --warn: #b45309; --warn-bg: #fef3c7; --bad: #b91c1c; --bad-bg: #fee2e2;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "Segoe UI", Arial, sans-serif; background: var(--bg); color: var(--text); }
+    header { background: #0f172a; color: #fff; padding: 16px 24px; }
+    header a { color: #fff; text-decoration: none; font-weight: 600; font-size: 20px; }
+    header span { color: #94a3b8; font-size: 14px; margin-left: 8px; }
+    main { max-width: 820px; margin: 28px auto; padding: 0 16px; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 22px; margin-bottom: 18px; }
+    h2 { margin: 0 0 6px; font-size: 19px; }
+    p.hint { margin: 0 0 14px; color: var(--muted); font-size: 14px; }
+    input[type=text] { width: 100%; padding: 12px; font-size: 15px; border: 1px solid #cbd2d9; border-radius: 8px; }
+    input[type=file] { font-size: 15px; }
+    button { margin-top: 12px; background: var(--blue); color: #fff; border: 0; border-radius: 8px;
+             padding: 11px 22px; font-size: 15px; cursor: pointer; }
+    button:hover { opacity: .9; }
+    button.small { background: #e4e7eb; color: var(--text); padding: 6px 12px; font-size: 13px; margin: 0; }
+    .flash { background: var(--warn-bg); color: var(--warn); padding: 12px 16px; border-radius: 8px; margin-bottom: 16px; }
+    .verdict { border-radius: 12px; padding: 26px; text-align: center; margin-bottom: 18px; }
+    .verdict .big { font-size: 34px; font-weight: 700; }
+    .verdict .score { font-size: 15px; margin-top: 4px; }
+    .verdict .why { font-size: 16px; margin-top: 12px; }
+    .SAFE { background: var(--safe-bg); color: var(--safe); }
+    .SUSPICIOUS { background: var(--warn-bg); color: var(--warn); }
+    .PHISHING { background: var(--bad-bg); color: var(--bad); }
+    .pill { display: inline-block; padding: 2px 10px; border-radius: 99px; font-size: 12px; font-weight: 600; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    td, th { text-align: left; padding: 8px 6px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { color: var(--muted); font-weight: 600; }
+    .pts { font-weight: 700; color: var(--bad); white-space: nowrap; }
+    .muted { color: var(--muted); font-size: 13px; }
+    details summary { cursor: pointer; color: var(--blue); margin-top: 6px; }
+    .break { word-break: break-all; }
+    a.back { display: inline-block; margin-bottom: 14px; color: var(--blue); text-decoration: none; }
+    footer { text-align: center; color: var(--muted); font-size: 12px; padding: 20px; }
+  </style>
+</head>
+<body>
+  <header><a href="{{ url_for('home') }}">🛡️ Phishing Email Analyzer</a><span>Check a link or an email before you trust it</span></header>
+  <main>
+    {% with messages = get_flashed_messages() %}
+      {% for m in messages %}<div class="flash">{{ m }}</div>{% endfor %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </main>
+  <footer>This tool only reads the text. It never opens links or attachments. Runs only on your computer.</footer>
+</body>
+</html>

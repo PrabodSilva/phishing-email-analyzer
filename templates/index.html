@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="card">
+  <h2>🔗 Check a link</h2>
+  <p class="hint">Right-click a link in the email, choose "Copy link address", and paste it here. Don't open it!</p>
+  <form action="{{ url_for('check_link') }}" method="post">
+    <input type="text" name="url" placeholder="e.g. http://paypa1-alerts.xyz/login" autocomplete="off" required>
+    <button type="submit">Check link</button>
+  </form>
+</div>
+
+<div class="card">
+  <h2>📧 Check a whole email</h2>
+  <p class="hint">In Gmail: open the email → click ⋮ (three dots) → "Download message". Then upload the .eml file here.</p>
+  <form action="{{ url_for('check_email') }}" method="post" enctype="multipart/form-data">
+    <input type="file" name="email_file" accept=".eml" required>
+    <br>
+    <button type="submit">Check email</button>
+  </form>
+</div>
+
+{% if history %}
+<div class="card">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h2>🕘 Recent checks</h2>
+    <form action="{{ url_for('clear_history') }}" method="post"><button class="small" type="submit">Clear</button></form>
+  </div>
+  <table>
+    <tr><th>Time</th><th>Checked</th><th>Result</th></tr>
+    {% for h in history %}
+    <tr>
+      <td class="muted">{{ h.time }}</td>
+      <td class="break">{{ '📧' if h.mode == 'email' else '🔗' }} {{ h.input }}</td>
+      <td><span class="pill {{ h.verdict }}">{{ h.verdict }} · {{ h.score }}</span></td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+{% endif %}
+
+{% endblock %}

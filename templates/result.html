@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block content %}
+
+<a class="back" href="{{ url_for('home') }}">← Check another</a>
+
+{% set icon = {'SAFE': '✅', 'SUSPICIOUS': '⚠️', 'PHISHING': '❌'}[r.verdict] %}
+<div class="verdict {{ r.verdict }}">
+  <div class="big">{{ icon }} {{ r.verdict }}</div>
+  <div class="score">{{ r.verdict_text }} · Risk score {{ r.score }} / 100</div>
+  <div class="why">{{ r.summary }}</div>
+</div>
+
+<div class="card">
+  <h2>What was checked</h2>
+  <table>
+    {% if r.mode == 'email' %}
+      <tr><th>File</th><td class="break">{{ r.input }}</td></tr>
+      <tr><th>Subject</th><td>{{ r.subject }}</td></tr>
+      <tr><th>From</th><td class="break">{{ r.from }}</td></tr>
+      <tr><th>Security checks</th><td>SPF: {{ r.auth.spf }} · DKIM: {{ r.auth.dkim }} · DMARC: {{ r.auth.dmarc }}</td></tr>
+      <tr><th>Links inside</th><td>{{ r.links|length }}</td></tr>
+      <tr><th>Attachments</th><td>{{ r.attachments|join(', ') if r.attachments else 'none' }}</td></tr>
+    {% else %}
+      <tr><th>Link</th><td class="break">{{ r.input }}</td></tr>
+      <tr><th>Real website</th><td><b>{{ r.real_site }}</b></td></tr>
+    {% endif %}
+  </table>
+</div>
+
+{% if r.reasons %}
+<div class="card">
+  <h2>🚩 {{ r.reasons|length }} red flag{{ 's' if r.reasons|length != 1 }} found</h2>
+  <details>
+  <summary>Show details</summary>
+  <table style="margin-top:10px;">
+    {% for x in r.reasons %}
+    <tr>
+      <td class="pts">+{{ x.points }}</td>
+      <td>
+        <b>{{ x.short }}</b>
+        <div class="muted">{{ x.detail }}</div>
+      </td>
+      <td class="muted">{{ x.category }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% if chart %}
+    <p class="muted" style="margin-top:16px;">Where the risk points came from:</p>
+    <img src="data:image/png;base64,{{ chart }}" alt="Risk points by category" style="width:100%; max-width:440px;">
+  {% endif %}
+  </details>
+</div>
+{% endif %}
+
+{% if r.mode == 'email' and r.links %}
+<div class="card">
+  <h2>🔗 Links in this email</h2>
+  <table>
+    {% for l in r.links %}
+    <tr>
+      <td class="break">{{ l.url }}</td>
+      <td>{% if l.findings %}<span class="pill PHISHING">{{ l.findings|length }} flags</span>{% else %}<span class="pill SAFE">clean</span>{% endif %}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+{% endif %}
+
+{% endblock %}

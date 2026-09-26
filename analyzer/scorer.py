@@ -129,7 +129,7 @@ def make_verdict(score, limits):
 
 def make_summary(verdict, reasons, mode):
     """One very short sentence for the web page."""
-    big = [r["short"] for r in reasons if r["points"] >= 10][:3]
+    big = [r["short"] for r in reasons if r["points"] >= 10][:2]
     if verdict == "SAFE":
         if mode == "email":
             return "Sender passed the security checks and no phishing tricks were found."
